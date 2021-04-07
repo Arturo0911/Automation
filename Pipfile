@@ -6,6 +6,10 @@ name = "pypi"
 [packages]
 spotipy = "*"
 python-decouple = "*"
+beautifulsoup4 = "*"
+requests = "*"
+pyfiglet = "==0.7"
+selenium = "*"
 
 [dev-packages]
 
