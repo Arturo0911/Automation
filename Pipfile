@@ -10,6 +10,8 @@ beautifulsoup4 = "*"
 requests = "*"
 pyfiglet = "==0.7"
 selenium = "*"
+numpy = "*"
+pandas = "*"
 
 [dev-packages]
 
