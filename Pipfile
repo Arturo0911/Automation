@@ -12,6 +12,7 @@ pyfiglet = "==0.7"
 selenium = "*"
 numpy = "*"
 pandas = "*"
+jupyter = "*"
 
 [dev-packages]
 
