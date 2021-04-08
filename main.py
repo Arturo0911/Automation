@@ -44,6 +44,14 @@ def use_selenium():
     print(element)
 
 
+def another_function():
+    print("")
+
+
+
+    while True:
+        print("")
+        break
 
 
 
