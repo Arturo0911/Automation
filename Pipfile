@@ -13,6 +13,8 @@ selenium = "*"
 numpy = "*"
 pandas = "*"
 jupyter = "*"
+matplotlib = "*"
+seaborn = "*"
 
 [dev-packages]
 
