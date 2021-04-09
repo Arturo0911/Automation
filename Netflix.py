@@ -2,7 +2,7 @@
 
 import numpy as np
 import pandas as pd
-
+from pprint import pprint
 
 
 """
@@ -15,15 +15,6 @@ PATH = "practices/netflix_titles.csv"
 
 def main():
     
-
-
-
-
-
-    """
-    The headeres =>
-        ['show_id', 'type', 'title', 'director', 'cast', 'country', 'date_added', 'release_year', 'rating', 'duration', 'listed_in', 'description']
-    """
     netflix = pd.read_csv(PATH)
     headers = list()
     rating = list()
@@ -39,23 +30,79 @@ def main():
 
 
     print("""
-    Rating information =>
-    \n
-    ['TV-PG', 'NR', 'TV-G', 'TV-Y', nan, 'TV-Y7','TV-Y7-FV', 'UR']
 
-    G               General Audience
-    TV-G            General Audience 
-    PG              Parental Guidance Suggested
-    PG-13           Parents Strongly Cautioned
-    R               Restricted
-    NC-17           Adults Only
-    TV-MA           Olders than 17
-    TV-14           Olders than 14 Parental Guidance Suggested
-    TV-Y7-FV        Chill audience with fiction violence and strongs emotions
+        The headeres:
+
+        'show_id'           'type'          'title'         'director'
+        'cast'              'country'       'date_added'    'release_year'
+        'rating'            'duration'      'listed_in'     'description'
+        
+
+        Rating or classification about the content:
+                
+        NR & UR         Not rated or Un rated, generally is
+                            because, the content of the film
+                            was not shiped with the classification propertly
+                            and the actual content would be not propertly to
+                            childrens
+
+        TV-PG           Guidance Parental suggested
+        TV-Y7           Children Public for 7 years old
+        TV-Y            Children Public, under 6 years old
+        G               General Audience
+        TV-G            General Audience 
+        PG              Parental Guidance Suggested
+        PG-13           Parents Strongly Cautioned
+        R               Restricted
+        NC-17           Adults Only
+        TV-MA           Olders than 17
+        TV-14           Olders than 14 Parental Guidance Suggested
+        TV-Y7-FV        Chill audience with fiction violence and strongs emotions
+
+        Type:
+
+        Tv-Show or Movie
     """)
     
-    print(rating)
-    print(netflix[(netflix['type'] == 'Movie') & (netflix['country'] == "United States")][['title', 'country', 'rating', 'duration']])
+    print("""
+    Setting some filters about the rating for olders than 17 years old
+    generating filters for the country => Unieted States
+    Type movie""")
+
+    
+    
+    def filter_by_duration(duration):
+
+        return int(duration.split(" ")[0]) <= 100 
+
+
+
+
+    print(netflix[(netflix['country'] == 'United States') & (netflix['type'] == 'Movie') & (netflix['rating'] == 'R')][['duration']])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
