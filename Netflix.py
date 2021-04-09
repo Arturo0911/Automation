@@ -13,6 +13,14 @@ PATH = "practices/netflix_titles.csv"
 
 
 
+
+def duration_filter(duration):
+
+    return int(duration.split(" ")[0]) <= 100
+
+
+
+
 def main():
     
     netflix = pd.read_csv(PATH)
@@ -69,42 +77,7 @@ def main():
     generating filters for the country => Unieted States
     Type movie""")
 
-    
-    
-    def filter_by_duration(duration):
-
-        return int(duration.split(" ")[0]) <= 100 
-
-
-
-
-    print(netflix[(netflix['country'] == 'United States') & (netflix['type'] == 'Movie') & (netflix['rating'] == 'R')][['duration']])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    print(netflix[(netflix['country'] == 'United States') & (netflix['type'] == 'Movie') & (netflix['rating'] == 'R') & (netflix['duration'].apply(lambda x: duration_filter(x)) )][['title','rating','duration']])
 
 
 if __name__ == '__main__':
