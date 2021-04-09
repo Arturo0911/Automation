@@ -85,23 +85,68 @@ def playing_with_the_years():
             stack_year.append(x)
 
     
-
+    
     stack_analysis = list()
     for i in stack_year:
         #print(i)
         #print("The mean of base pay from the year {}".format(i))
         #stack_analysis.append(pd.to_numeric(data[data['Year'] == int(i)]['BasePay']).mean())
         
-        data_analysis.append({i: pd.to_numeric(data[data['Year'] == int(i)]['BasePay']).mean()})
+        data_analysis.append({i: pd.to_numeric(data[data['Year'] == int(i)]['BasePay']).mean(), 'size': len(data[data['Year'] == int(i)]['Year'])})
 
     pprint(data_analysis)
-
+    
+    print("\n")
+    print("The quantity of values per year")
+    print("\n")
+    print(len(data[data['Year'] == 2011]['Year']))
+    print(len(data[data['Year'] == 2012]['Year']))
+    print(len(data[data['Year'] == 2013]['Year']))
+    print(len(data[data['Year'] == 2014]['Year']))
 
     #print("Printing about the base pay from the year 2011")
     #print(pd.to_numeric(data[data['Year'] == 2011]['BasePay']).mean())
 
-print(data['Benefits'].dropna())
-playing_with_the_years()
+#print(data['Benefits'].dropna())
+#playing_with_the_years()
+
+
+
+def viewing_job_title():
+
+    #print(data[data['EmployeeName'] =='JOSEPH DRISCOLL' ]['TotalPayBenefits'])
+    
+
+    #print("viewing the person who get more benefits")
+    #print(data[data['TotalPayBenefits'] == data['TotalPayBenefits'].max()]['EmployeeName'])
+
+    #print("Using the parameter GroupBy")
+    #print(data.groupby('Year').mean())
+
+
+    print("viewing if the job title is for chief")
+
+    def is_chief(title):
+
+        if 'chief' in title.lower().split():
+            return True
+        else:
+            return False
+
+        #return 'chief' in title.lower().split()
+
+
+    #print(is_chief("chief arturo"))
+
+
+    
+    print(sum(data['JobTitle'].apply(lambda x: is_chief(x))))
+
+
+
+
+
+viewing_job_title()
 
 
 
@@ -115,7 +160,7 @@ def viewing_status():
     print(stack)
 
 
-
+"""
 def viewing_covid():
 
     headers = list()
@@ -127,26 +172,18 @@ def viewing_covid():
         if x not in headers:
             headers.append(x)
 
-    #print(headers)
-    #print(covid[covid['Name'] == "Ecuador"][['Name', 'Cases - cumulative total']])
 
 
     covid = covid[covid['Name'] == 'Ecuador']
      
-    #print(covid)
-
     for x in covid:
 
         all_data.append({x: covid[x]})
 
-    #pprint(all_data)
-
     for k in all_data:
 
         print(k)
-
-
-
+"""
 
 
 
