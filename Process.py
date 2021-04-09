@@ -6,7 +6,7 @@ from pprint import pprint
 
 
 PATH = "practices/Salaries.csv"
-
+COVID_URL = "https://covid19.who.int/WHO-COVID-19-global-table-data.csv"
 
 data = pd.read_csv(PATH,low_memory=False)
 #print(data.info())
@@ -14,8 +14,8 @@ data = pd.read_csv(PATH,low_memory=False)
 
 
 #print("[*] Getting the headers")
-headers = [i for i in data]
-print(headers)
+#headers = [i for i in data]
+#print(headers)
 
 # deleting values with "Not Provided in the values"
 data = data[data['BasePay'] != "Not Provided"]
@@ -69,12 +69,15 @@ def getting_info_title():
 
 def playing_with_the_years():
 
-    # getting all the variants of years
-
-    stack_year = []
-    data_analysis = []
-
-
+    print("getting all the variants of years")
+    
+    headers = list()
+    stack_year = list()
+    data_analysis = list()
+    
+    for j in data:
+        headers.append(j)
+    print(headers)
 
     for x in data['Year']:
         
@@ -97,13 +100,13 @@ def playing_with_the_years():
     #print("Printing about the base pay from the year 2011")
     #print(pd.to_numeric(data[data['Year'] == 2011]['BasePay']).mean())
 
-
-#playing_with_the_years()
+print(data['Benefits'].dropna())
+playing_with_the_years()
 
 
 
 def viewing_status():
-    
+        
     stack = []
     for x in data['Status']:
         if x not in stack:
@@ -113,8 +116,34 @@ def viewing_status():
 
 
 
-viewing_status()
+def viewing_covid():
 
+    headers = list()
+    all_data = list()
+
+    covid = pd.read_csv(COVID_URL)
+    
+    for x in covid:
+        if x not in headers:
+            headers.append(x)
+
+    #print(headers)
+    #print(covid[covid['Name'] == "Ecuador"][['Name', 'Cases - cumulative total']])
+
+
+    covid = covid[covid['Name'] == 'Ecuador']
+     
+    #print(covid)
+
+    for x in covid:
+
+        all_data.append({x: covid[x]})
+
+    #pprint(all_data)
+
+    for k in all_data:
+
+        print(k)
 
 
 
