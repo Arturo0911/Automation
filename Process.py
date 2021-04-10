@@ -150,6 +150,16 @@ viewing_job_title()
 
 
 
+def information():
+
+    print("hi")
+
+
+    for x in range(100):
+        print(x)
+        break
+
+
 def viewing_status():
         
     stack = []

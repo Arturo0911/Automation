@@ -99,7 +99,10 @@ def review_data():
 
 
 
-    print(netflix[(netflix['title'].apply(lambda x:filter(x))) & (netflix['country'] =='United States')   ][['title', 'country']]  )
+    data_frame = netflix[(netflix['title'].apply(lambda x:filter(x))) & (netflix['country'] =='United States')   ][['title', 'release_year', 'rating']]
+    print(data_frame)
+    #data_frame.plot(x = "release_year", y= "rating", kinkd= "scatter")
+    #plt.show()
 
 
 
