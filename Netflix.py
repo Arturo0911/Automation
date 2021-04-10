@@ -3,6 +3,10 @@
 import numpy as np
 import pandas as pd
 from pprint import pprint
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+
 
 
 """
@@ -80,6 +84,42 @@ def main():
     print(netflix[(netflix['country'] == 'United States') & (netflix['type'] == 'Movie') & (netflix['rating'] == 'R') & (netflix['duration'].apply(lambda x: duration_filter(x)) )][['title','rating','duration']])
 
 
+
+def review_data():
+
+    netflix = pd.read_csv("practices/netflix_titles.csv")
+    
+    #sns.pairplot(netflix, hue="type")
+    #plt.show()
+    #print(netflix)
+    
+    def filter(title):
+
+        return "murder" in title.lower().split(" ")
+
+
+
+    print(netflix[(netflix['title'].apply(lambda x:filter(x))) & (netflix['country'] =='United States')   ][['title', 'country']]  )
+
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
 
-    main()
+    #main()
+    review_data()
+
+
+
+
+
+
+
