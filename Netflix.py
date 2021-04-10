@@ -100,15 +100,28 @@ def review_data():
 
 
     data_frame = netflix[(netflix['title'].apply(lambda x:filter(x))) & (netflix['country'] =='United States')   ][['title', 'release_year', 'rating']]
-    print(data_frame)
-    #data_frame.plot(x = "release_year", y= "rating", kinkd= "scatter")
-    #plt.show()
+    data_frame['relase_year'] = pd.to_numeric(data_frame['release_year'])
+    print(data_frame) # printing the data by country and the murder word in the title
 
 
 
 
+def filtering_by_duration():
+    
 
+    netflix = pd.read_csv("practices/netflix_titles.csv")
+    
+    def filter_by_duration(duration):
+        
+        return int(duration.split(" ")[0]) == 100
 
+    def filter_by_country(country):
+
+        return country == "United States"
+    
+    netflix_filtered = netflix[(netflix['country'].apply(lambda x: filter_by_country(x))) & (netflix['duration'].apply(lambda y: filter_by_duration(y)))]
+
+    print(netflix_filtered[['title', 'description']])
 
 
 
@@ -118,8 +131,8 @@ def review_data():
 if __name__ == '__main__':
 
     #main()
-    review_data()
-
+    #review_data()
+    filtering_by_duration()
 
 
 
