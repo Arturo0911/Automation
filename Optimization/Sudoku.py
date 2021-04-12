@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-import random
-
 """
     @author -> Arturo Negreiros
     @description -> Sudoku automation solver
@@ -46,84 +44,31 @@ def print_board(board):
 
 
 def solve_sudoku(board):
+    find = find_empty(board)
+    if not find:
+        return True
+    else:
+        row, col = find
 
-    if board is None:
-        print("No solutions!")
-        return
+    for x in range(1,10):
+        if check_valid_number(x, board, (row, col)):
+            board[row][col] = x
 
-    num_rows = len(board)
-    num_cols = len(board[0])
-    for r in range(num_rows):
-        for c in range(num_cols):
-            if board[r][c] == 0:
-                number = random.randint(1,9)
-                if check_valid_number(number, board):
-                    board[r][c] = number
+            if solve_sudoku(board):
+                return True
 
-    return board
+            board[row][col] = 0
 
-def re_solve(board):
-    for x in range(9):
-        for y in range(9):
-            random_number = random.randint(1,9)
-            if check_valid_number(random_number, board):
-                board[x][y] = random_number
-    return board
-
-
-
-
-def main():
-    print_board(sudoku_board)
-    sudoku_solved = solve_sudoku(sudoku_board)
-    while True:
-        
-        print_board(sudoku_solved)
-        if not_repeat_in_square(sudoku_solved, 0, 0):
-            break
-        else:
-            re_solve(sudoku_solved)
-
-def not_repeat_in_square(board,positions_y,positions_x):
-
-    # An stack to add any number in a portion of square
-    # from the sudoku board
-    stack = list()
-    for x in board:
-        for y in x:
-            #print(y, end= "")
-            if y not in stack:
-                stack.append(y)
-            else:
-                pass
-            if positions_x ==2 and positions_x != 0:
-                break
-            positions_x += 1
-        if positions_y  == 3:
-            break
-        #print("\n")
-        positions_y += 1
-
-    # only if the size of the stack representing
-    # the values of the portions square from sudoku
-    # board, is equal to 9 then one square is right
-    return len(stack) == 9
+    return False
 
 
 def find_empty(board):
-    
     for x in range(len(board)):
         for y in range(len(board[0])):
-            
             if board[x][y] == 0:
-                return (x,y)
+                return (x, y)
 
     return None
-
-
-# number to be validated
-# game board
-# tuple with the positions with zeros
 
 def check_valid_number(number, board, pos):
 
@@ -132,33 +77,37 @@ def check_valid_number(number, board, pos):
     # and square
     # this test is for the first portion square
 
-    is_valid_row = True
-    row_position = 0
-    # Here the validation is for the row
-    for x in board:
+    # checking the rows
+    # 'pos' parameter is a tuple withe the positions with zero value
+    for x in range(len(board[0])):
+        if board[pos[0]][x] == number and pos[1] != x:
+            return False
 
-        if number not in x:
-            is_valid_row = True
-        else:
-            is_valid_row = False
-        
-        if row_position == 3:
-            break
-        row_position += 1
+    # checking columns
+    for y in range(len(board)):
+        if board[y][pos[1]]  == number and pos[0]  != y:
+            return False
 
-    for x in board:
+    # checking the box
+    board_x = pos[1] // 3
+    board_y = pos[0] // 3
 
-        for y in range(3):
+    for i in range(board_y *3, board_y*3 + 3):
+        for j in range(board_x*3, board_x*3 + 3):
+            if board[i][j] == number and (i,j) != pos:
+                return  False
 
-            if x[y] != number:
-                is_valid_row = True
-            else:
-                is_valid_row = False
-
-    return is_valid_row
-
-
+    return True
+#def main():
+print_board(sudoku_board)
+print("[*] solving")
+solve_sudoku(sudoku_board)
+print_board(sudoku_board)
 
 
+
+
+"""
 if __name__ == '__main__':
     main()
+"""
