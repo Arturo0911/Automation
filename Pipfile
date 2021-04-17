@@ -12,6 +12,9 @@ pyfiglet = "==0.7"
 selenium = "*"
 numpy = "*"
 pandas = "*"
+jupyter = "*"
+matplotlib = "*"
+seaborn = "*"
 
 [dev-packages]
 
