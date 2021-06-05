@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 tensorflow = "*"
 tensorflow-cpu = "*"
+ipy = "*"
 
 [dev-packages]
 
